@@ -251,8 +251,18 @@
     function launchGame(swfFile) {
         overlay.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        
         const ruffle = window.RufflePlayer.newest();
         const player = ruffle.createPlayer();
+        
+        // ¡Magia aquí! Configuramos el emulador antes de cargar el juego
+        player.config = {
+            letterbox: "on",      // Centra el juego y pone bandas negras si no encaja
+            forceScale: true,     // Fuerza a que ocupe el máximo espacio posible
+            autoplay: "on",       // Salta la pantalla de "Click to play"
+            unmuteOverlay: "hidden" // Oculta el aviso de sonido
+        };
+
         playerContainer.innerHTML = '';
         playerContainer.appendChild(player);
         player.load({ url: swfFile, allowScriptAccess: true });
