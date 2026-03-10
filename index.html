@@ -4,33 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Flash Games Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background: #1a1a1a; color: white; margin: 0; padding: 20px; text-align: center; }
-        .header { margin-bottom: 20px; }
-        h1 { color: #ffcc00; font-size: 36px;}
-        input[type="text"] { padding: 12px; width: 350px; border-radius: 8px; border: none; font-size: 16px; outline: none; background: #333; color: white;}
-        .tags { margin: 20px 0; }
-        button { padding: 8px 15px; margin: 5px; cursor: pointer; border-radius: 5px; border: none; background: #444; color: white; transition: 0.2s;}
-        button:hover { background: #555; }
-        button.active { background: #ffcc00; color: black; font-weight: bold; }
-        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
-        .card { background: #2a2a2a; padding: 15px; border-radius: 8px; width: 200px; cursor: pointer; transition: transform 0.2s; border: 1px solid #444;}
-        .card:hover { transform: translateY(-5px); border-color: #ffcc00;}
-        .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; background: #111; margin-bottom: 10px; }
-        .card h3 { margin: 0 0 5px 0; font-size: 18px; color: #fff; }
-        .card small { color: #888; text-transform: uppercase; font-size: 12px;}
+        /* Diseño moderno y atractivo */
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            padding: 40px 20px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Fondo degradado elegante */
+            color: #ffffff;
+            min-height: 100vh;
+        }
         
+        h1 { 
+            font-size: 42px; 
+            font-weight: 800;
+            background: -webkit-linear-gradient(#ffcc00, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-shadow: 0px 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        /* Buscador estilizado */
+        input[type="text"] { 
+            padding: 15px 20px; 
+            width: 100%;
+            max-width: 400px; 
+            border-radius: 30px; 
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            font-size: 16px; 
+            outline: none; 
+            background: rgba(255, 255, 255, 0.05); 
+            color: white;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        input[type="text"]:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        /* Botones de etiquetas de selección múltiple */
+        .tags { margin: 30px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+        .tags button { 
+            padding: 8px 18px; 
+            cursor: pointer; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            background: rgba(0, 0, 0, 0.3); 
+            color: #ccc; 
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .tags button:hover { background: rgba(255, 255, 255, 0.1); color: white; transform: translateY(-2px); }
+        .tags button.active { 
+            background: #ffcc00; 
+            color: #1a1a1a; 
+            border-color: #ffcc00;
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4);
+        }
+
+        /* Cuadrícula de tarjetas con efecto cristal */
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 30px; max-width: 1000px; margin-left: auto; margin-right: auto;}
+        .card { 
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 15px; 
+            border-radius: 16px; 
+            width: 220px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+        .card:hover { 
+            transform: translateY(-8px); 
+            border-color: rgba(255, 204, 0, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .card img { width: 100%; height: 130px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 18px; color: #fff; font-weight: 600; }
+        .card small { color: #ffcc00; text-transform: uppercase; font-size: 11px; font-weight: 600; letter-spacing: 1px;}
+        
+        /* Sección del emulador */
         #player-section { display: none; margin-top: 20px; }
-        #game-container { width: 800px; height: 600px; margin: 0 auto; background: black; border: 4px solid #555; border-radius: 8px; overflow: hidden;}
-        .back-btn { margin-bottom: 15px; background: #ff3333; font-size: 16px; font-weight: bold;}
-        .back-btn:hover { background: #cc0000; }
+        #game-container { width: 800px; height: 600px; margin: 0 auto; background: #000; border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden;}
+        .back-btn { 
+            margin-bottom: 20px; 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white;
+            font-size: 16px; 
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <div id="main-section">
         <div class="header">
-            <h1>🎮 Retro Flash Archive</h1>
+            <h1>Retro Flash Archive</h1>
             <input type="text" id="search-bar" placeholder="Search for a game... (e.g., stickman)">
         </div>
 
@@ -42,46 +126,43 @@
     </div>
 
     <div id="player-section">
-        <button class="back-btn" onclick="goBack()">⬅ Back to Games Menu</button>
+        <button class="back-btn" onclick="goBack()">⬅ Back to Catalog</button>
         <div id="game-container"></div>
     </div>
 
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
         // ==========================================
-        // HOW TO ADD GAMES IN THE FUTURE
+        // DATA: Todo en inglés como pediste
         // ==========================================
-        // Every time someone on TikTok asks for a game, just copy one of these blocks {}
-        // and add it to the list. The website will automatically update!
-        
         const gamesCatalog = [
             {
                 name: "Stickman Empires",
                 tags: ["strategy", "stickman"],
-                image: "https://via.placeholder.com/200x120/444444/ffcc00?text=Stickman",
+                image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=400&h=250",
                 type: "local", 
-                file: "stickman.swf" // Make sure this EXACT file name is in your GitHub
+                file: "stickman.swf" 
             },
             {
                 name: "Fireboy and Watergirl",
                 tags: ["puzzle", "co-op"],
-                image: "https://via.placeholder.com/200x120/444444/00ccff?text=Fire+Water",
-                type: "link", // Use "link" if you don't have the .swf and want to link out
+                image: "https://images.unsplash.com/photo-1614680376573-3e4e120f56f1?auto=format&fit=crop&q=80&w=400&h=250",
+                type: "link",
                 file: "https://www.crazygames.com/game/fireboy-and-watergirl-the-forest-temple"
             },
             {
                 name: "Bloons Tower Defense",
                 tags: ["strategy", "tower defense"],
-                image: "https://via.placeholder.com/200x120/444444/55ff55?text=Bloons",
+                image: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&q=80&w=400&h=250",
                 type: "local",
                 file: "bloons.swf"
             }
         ];
 
         // ==========================================
-        // ENGINE LOGIC (DO NOT TOUCH)
+        // NUEVA LÓGICA: Selección Múltiple de Etiquetas
         // ==========================================
-        let activeTag = null;
+        let activeTags = []; // Ahora es un Array, guarda varias etiquetas
 
         function renderGames(searchText = "") {
             const container = document.getElementById("games-container");
@@ -89,10 +170,13 @@
             const cleanText = searchText.toLowerCase().trim();
 
             gamesCatalog.forEach(game => {
+                // Comprueba el texto del buscador
                 const matchText = game.name.toLowerCase().includes(cleanText);
-                const matchTag = !activeTag || game.tags.includes(activeTag);
+                
+                // Comprueba las etiquetas: El juego debe tener TODAS las etiquetas seleccionadas
+                const matchTags = activeTags.length === 0 || activeTags.every(tag => game.tags.includes(tag));
 
-                if (matchText && matchTag) {
+                if (matchText && matchTags) {
                     const div = document.createElement("div");
                     div.className = "card";
                     div.innerHTML = `
@@ -113,13 +197,15 @@
             allTags.forEach(tag => {
                 const btn = document.createElement("button");
                 btn.innerText = tag.toUpperCase();
+                
                 btn.onclick = () => {
-                    if (activeTag === tag) {
-                        activeTag = null;
+                    // Si la etiqueta ya estaba pulsada, la quitamos de la lista
+                    if (activeTags.includes(tag)) {
+                        activeTags = activeTags.filter(t => t !== tag);
                         btn.classList.remove("active");
                     } else {
-                        activeTag = tag;
-                        document.querySelectorAll(".tags button").forEach(b => b.classList.remove("active"));
+                        // Si no estaba pulsada, la añadimos a la lista
+                        activeTags.push(tag);
                         btn.classList.add("active");
                     }
                     renderGames(document.getElementById("search-bar").value);
