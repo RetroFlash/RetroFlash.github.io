@@ -1,2 +1,2 @@
-# HeRixX35.github.io
+# RetroFlash.github.io
 Proyecto juegos nostálgicos
