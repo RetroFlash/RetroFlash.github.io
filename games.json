@@ -1,36 +1,42 @@
 [
     {
         "name": "Stickman Empires",
-        "tags": ["strategy", "stickman"],
+        "tags": ["Strategy", "Stickman"],
         "image": "https://static.wikia.nocookie.net/stickempires-rts/images/5/56/SE_Logo_Transparent.png/revision/latest?cb=20140125043021",
         "type": "local",
         "file": "juegos-swf/stick-empire.swf"
     },
     {
         "name": "Fireboy and Watergirl",
-        "tags": ["puzzle", "co-op"],
+        "tags": ["Puzzle", "Co-op"],
         "image": "https://images.unsplash.com/photo-1614680376573-3e4e120f56f1?auto=format&fit=crop&q=80&w=400&h=250",
         "type": "link",
         "file": "https://www.crazygames.com/game/fireboy-and-watergirl-the-forest-temple"
     },
     {
         "name": "Bloons Tower Defense",
-        "tags": ["strategy", "tower defense"],
+        "tags": ["Strategy", "Tower Defense"],
         "image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&q=80&w=400&h=250",
         "type": "local",
         "file": "bloons.swf"
     },
     {
         "name": "Siegius",
-        "tags": ["strategy", "War"],
+        "tags": ["Strategy", "War"],
         "image": "https://1.bp.blogspot.com/-XBz3t1KPCAw/Td6ocshlO3I/AAAAAAAAAgc/hKte1y1Erzs/s1600/siegius.jpg",
         "type": "local",
         "file": "juegos-swf/siegius.swf"
     },
     {
-    "name": "Warfare 1917",
-    "tags": ["Estrategia", "War"],
-    "image": "https://www.lemon-web.net/images/blog_articles/1233/Warfare-1917.jpg",
-    "file": "juegos-swf/warfare-1917.swf"
+        "name": "Warfare 1917",
+        "tags": ["Strategy", "War"],
+        "image": "https://www.lemon-web.net/images/blog_articles/1233/Warfare-1917.jpg",
+        "file": "juegos-swf/warfare-1917.swf"
+    },
+    {
+        "name": "Jack Smith",
+        "tags": ["Strategy", "War"],
+        "image": "https://www.lemon-web.net/images/blog_articles/1233/Warfare-1917.jpg",
+        "file": "juegos-swf/JackSmith.swf"
     }
 ]
