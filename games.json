@@ -31,12 +31,14 @@
         "name": "Warfare 1917",
         "tags": ["Strategy", "War"],
         "image": "https://www.lemon-web.net/images/blog_articles/1233/Warfare-1917.jpg",
+        "type": "local"
         "file": "juegos-swf/warfare-1917.swf"
     },
     {
         "name": "Jack Smith",
         "tags": ["Strategy", "War"],
         "image": "https://www.coolmathgames.com/sites/default/files/styles/mobile_game_image/public/Jacksmith_OG-logo.jpg.webp?itok=2PtHdoX-",
+        "type": "local"
         "file": "juegos-swf/jacksmith.swf"
     }
 ]
