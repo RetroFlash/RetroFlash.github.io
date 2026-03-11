@@ -1,24 +1,10 @@
 [
     {
-        "name": "Stickman Empires",
-        "tags": ["Strategy", "Stickman"],
-        "image": "https://static.wikia.nocookie.net/stickempires-rts/images/5/56/SE_Logo_Transparent.png/revision/latest?cb=20140125043021",
-        "type": "local",
-        "file": "juegos-swf/stick-empire.swf"
-    },
-    {
         "name": "Fireboy and Watergirl",
         "tags": ["Puzzle", "Co-op"],
         "image": "https://images.igdb.com/igdb/image/upload/t_cover_big/n3pvfxrpnigkl9brcwne.webp",
         "type": "link",
         "file": "https://fireboyandwatergirl.site/es"
-    },
-    {
-        "name": "Bloons Tower Defense",
-        "tags": ["Strategy", "Tower Defense"],
-        "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/306020/capsule_616x353.jpg?t=1725022786",
-        "type": "local",
-        "file": "juegos-swf/bloons_td_5.swf"
     },
     {
         "name": "Siegius",
@@ -33,12 +19,5 @@
         "image": "https://www.lemon-web.net/images/blog_articles/1233/Warfare-1917.jpg",
         "type": "local",
         "file": "juegos-swf/warfare-1917.swf"
-    },
-    {
-        "name": "Jack Smith",
-        "tags": ["Strategy", "War"],
-        "image": "https://www.coolmathgames.com/sites/default/files/styles/mobile_game_image/public/Jacksmith_OG-logo.jpg.webp?itok=2PtHdoX-",
-        "type": "local",
-        "file": "juegos-swf/jacksmith.swf"
     }
 ]
