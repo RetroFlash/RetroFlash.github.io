@@ -177,6 +177,7 @@
             justify-content: center;
         }
 
+        /* Tu arreglo de centrado se mantiene aquí intacto */
         #ruffle-player {
             width: 90vw;
             height: 85vh;
@@ -197,6 +198,30 @@
             font-size: 3rem;
             cursor: pointer;
         }
+
+        /* --- NUEVO: Estilos del control de volumen --- */
+        .volume-control {
+            position: absolute;
+            top: 35px;
+            left: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            font-size: 0.9rem;
+            z-index: 2001;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .volume-control input[type=range] {
+            cursor: pointer;
+            accent-color: var(--primary);
+            width: 100px;
+        }
     </style>
 </head>
 <body>
@@ -215,6 +240,10 @@
 </main>
 
 <div id="game-overlay">
+    <div class="volume-control">
+        <span>🔊</span>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="1">
+    </div>
     <span class="close-overlay" onclick="closeGame()">&times;</span>
     <div id="ruffle-player"></div>
 </div>
@@ -223,15 +252,15 @@
 
 <script>
     let allGames = [];
-    let activeTags = new Set(); // Aquí guardamos las etiquetas seleccionadas a la vez
+    let activeTags = new Set(); 
 
     const gameGrid = document.getElementById('game-grid');
     const filtersContainer = document.getElementById('filters');
     const searchInput = document.getElementById('search-input');
     const overlay = document.getElementById('game-overlay');
     const playerContainer = document.getElementById('ruffle-player');
+    const volumeSlider = document.getElementById('volume-slider'); // NUEVO: Referencia al volumen
 
-    // 1. Cargar datos
     fetch('games.json')
         .then(response => response.json())
         .then(games => {
@@ -240,33 +269,29 @@
             renderizarJuegos();
         });
 
-    // 2. Crear botones de filtro múltiple
     function generarFiltros() {
         const categorias = new Set();
         allGames.forEach(game => game.tags.forEach(tag => categorias.add(tag)));
 
-        // Crear el botón "Todos"
         const btnTodos = document.createElement('button');
         btnTodos.className = 'filter-btn active';
         btnTodos.innerText = 'Todos';
         btnTodos.onclick = () => {
-            activeTags.clear(); // Borra todas las selecciones
+            activeTags.clear(); 
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btnTodos.classList.add('active');
             renderizarJuegos();
         };
         filtersContainer.appendChild(btnTodos);
 
-        // Crear el resto de botones
         categorias.forEach(categoria => {
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
             btn.innerText = categoria;
             
             btn.onclick = () => {
-                btnTodos.classList.remove('active'); // Quita la marca de "Todos"
+                btnTodos.classList.remove('active'); 
 
-                // Lógica de suma y resta de etiquetas
                 if (activeTags.has(categoria)) {
                     activeTags.delete(categoria);
                     btn.classList.remove('active');
@@ -275,7 +300,6 @@
                     btn.classList.add('active');
                 }
 
-                // Si no hay nada seleccionado, vuelve a marcar "Todos"
                 if (activeTags.size === 0) {
                     btnTodos.classList.add('active');
                 }
@@ -286,16 +310,13 @@
         });
     }
 
-    // 3. Pintar los juegos
     function renderizarJuegos() {
         gameGrid.innerHTML = '';
         const textoBusqueda = searchInput.value.toLowerCase();
 
         const juegosFiltrados = allGames.filter(game => {
-            // Filtro múltiple: El juego debe tener TODAS las etiquetas marcadas
             const tagsRequeridos = Array.from(activeTags);
             const coincideFiltro = tagsRequeridos.length === 0 || tagsRequeridos.every(tag => game.tags.includes(tag));
-            
             const coincideBusqueda = game.name.toLowerCase().includes(textoBusqueda);
             return coincideFiltro && coincideBusqueda;
         });
@@ -319,7 +340,6 @@
 
     searchInput.addEventListener('input', renderizarJuegos);
 
-    // Funciones del Emulador configuradas con centrado
     function launchGame(swfFile) {
         overlay.style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -327,7 +347,6 @@
         const ruffle = window.RufflePlayer.newest();
         const player = ruffle.createPlayer();
         
-        // Configuración que arregla la pantalla cortada
         player.config = {
             letterbox: "on",
             forceScale: true,
@@ -335,10 +354,21 @@
         };
 
         playerContainer.innerHTML = '';
+        
+        // Tu arreglo de expansión se mantiene intacto
         player.style.width = "100%";
         player.style.height = "100%";
+        
         playerContainer.appendChild(player);
         player.load({ url: swfFile, allowScriptAccess: true });
+
+        // NUEVO: Lógica del control de volumen
+        volumeSlider.value = 1; // Reseteamos la barra al 100% al abrir un juego
+        player.volume = 1;
+        
+        volumeSlider.oninput = (e) => {
+            player.volume = parseFloat(e.target.value); // Cambia el volumen según mueves la barra
+        };
     }
 
     function closeGame() {
