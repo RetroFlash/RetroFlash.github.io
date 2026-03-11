@@ -19,5 +19,12 @@
         "image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&q=80&w=400&h=250",
         "type": "local",
         "file": "bloons.swf"
+    },
+    {
+        "name": "Siegius",
+        "tags": ["strategy"],
+        "image": "https://1.bp.blogspot.com/-XBz3t1KPCAw/Td6ocshlO3I/AAAAAAAAAgc/hKte1y1Erzs/s1600/siegius.jpg",
+        "type": "local",
+        "file": "juegos-swf/siegius.swf"
     }
 ]
